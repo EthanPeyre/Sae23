@@ -1,17 +1,17 @@
 <?php
 // config.php
 
-// Affiche les erreurs pour le débogage (à commenter en production)
+// Display errors for debugging (comment out in production)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Démarrage de la session, essentiel pour les pages de login/admin
+// Start the session, essential for login/admin pages
 session_start();
 
-// Inclusion de vos paramètres de connexion à la base de données
+// Include your database connection parameters
 require_once 'db.php'; 
 
-// Fonction de sécurité pour l'affichage des données
+// Security function for data display
 function h($str) {
     if ($str === null) return '';
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');

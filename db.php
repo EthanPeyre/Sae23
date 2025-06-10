@@ -1,12 +1,12 @@
 <?php
 // db.php
-$host = "192.168.1.108";   // ou IP du serveur MySQL
-$user = "noder";        // adapte si besoin
-$pass = "passroot";            // mot de passe XAMPP (souvent vide par défaut)
-$dbname = "sae23";     // nom de ta base
+$host = "192.168.1.108";   // or MySQL server IP
+$user = "noder";        // adapt if needed
+$pass = "passroot";            // XAMPP password (often empty by default)
+$dbname = "sae23";     // your database name
 
 $conn = mysqli_connect($host, $user, $pass, $dbname);
 if (!$conn) {
-    die("Erreur de connexion à la base de données : " . mysqli_connect_error());
+    die("Database connection error: " . mysqli_connect_error());
 }
 ?>

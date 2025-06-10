@@ -1,32 +1,32 @@
--- Schéma SQL pour la SAE23 – Portail IoT IUT Blagnac
+-- SQL Schema for SAE23 – IUT Blagnac IoT Portal
 
--- 1) Base de données
+-- 1) Database
 CREATE DATABASE IF NOT EXISTS `sae23` 
   CHARACTER SET utf8mb4 
   COLLATE utf8mb4_general_ci;
 USE `sae23`;
 
--- 2) Table Administrateur
---    Stocke les comptes du super‑administrateur du site
+-- 2) Administrator Table
+--    Stores the accounts for the site's super-administrator
 CREATE TABLE `Administrateur` (
   `login`       VARCHAR(50)   NOT NULL,
-  `mot_de_passe` VARCHAR(255) NOT NULL,  -- MD5 ou password_hash selon vos choix
+  `mot_de_passe` VARCHAR(255) NOT NULL,  -- MD5 or password_hash depending on your choices
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 3) Table Bâtiment
---    Représente un bâtiment géré par le site
+-- 3) Building Table
+--    Represents a building managed by the site
 CREATE TABLE `Batiment` (
   `id`           INT            NOT NULL AUTO_INCREMENT,
   `nom`          VARCHAR(100)   NOT NULL UNIQUE,
-  `login`        VARCHAR(50)    NULL,  -- si vous autorisez chaque bâtiment à avoir login/mdp
+  `login`        VARCHAR(50)    NULL,  -- if you allow each building to have login/password
   `mot_de_passe` VARCHAR(25)   NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`login`) REFERENCES `Administrateur`(`login`) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 4) Table Salle
---    Chaque salle appartient à un bâtiment
+-- 4) Room Table
+--    Each room belongs to a building
 CREATE TABLE `Salle` (
   `nom`         VARCHAR(50)  NOT NULL,
   `type`        VARCHAR(50)  NOT NULL,
@@ -40,13 +40,13 @@ CREATE TABLE `Salle` (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 5) Table Capteur
---    Chaque capteur est rattaché à une salle
+-- 5) Sensor Table
+--    Each sensor is attached to a room
 CREATE TABLE `Capteur` (
   `nom`       VARCHAR(100) NOT NULL,
-  `type`      VARCHAR(50)  NOT NULL,   -- ex. temperature, humidity, co2…
-  `unite`     VARCHAR(20)  NOT NULL,   -- ex. °C, %, ppm…
-  `id_salle`  VARCHAR(50)  NOT NULL,   -- FK vers Salle.nom
+  `type`      VARCHAR(50)  NOT NULL,   -- e.g. temperature, humidity, co2…
+  `unite`     VARCHAR(20)  NOT NULL,   -- e.g. °C, %, ppm…
+  `id_salle`  VARCHAR(50)  NOT NULL,   -- FK to Salle.nom
   PRIMARY KEY (`nom`),
   INDEX (`id_salle`),
   FOREIGN KEY (`id_salle`)
@@ -55,8 +55,8 @@ CREATE TABLE `Capteur` (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 6) Table Mesure
---    Chaque relevé d’un capteur à un instant donné
+-- 6) Measurement Table
+--    Each reading from a sensor at a given time
 CREATE TABLE `Mesure` (
   `id`         INT            NOT NULL AUTO_INCREMENT,
   `valeur`     DOUBLE         NOT NULL,

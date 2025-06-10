@@ -110,31 +110,24 @@ footer {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* === AJOUTS POUR LA PAGE GRAPHIQUES.PHP === */
-
-/* Conteneur pour les panneaux Grafana */
 .grafana-container {
-    padding: 0; /* On enlève le padding pour que les panneaux s'alignent bien */
+    padding: 0;
 }
 
-/* On donne une hauteur fixe et rectangulaire aux panneaux Grafana */
 .grafana-container .panel-wrapper {
     height: 350px; 
 }
 
-/* S'assure que l'iframe remplit bien le panneau */
 .panel-wrapper iframe {
     height: 100%;
     width: 100%;
 }
 
-/* Nouveau conteneur pour le panneau Node-RED */
 .nodered-container {
-    margin-top: 3rem; /* Ajoute un grand espace au-dessus */
+    margin-top: 3rem;
 }
 
-/* On donne une très grande hauteur au panneau Node-RED */
 .nodered-container .panel-wrapper {
-    height: 80vh; /* 80% de la hauteur de l'écran, c'est très grand ! */
+    height: 80vh;
 }
 

@@ -3,16 +3,16 @@ include('header.php');
 include('db.php');
 ?>
 
-<h1>Données en direct</h1>
+<h1>Live Data</h1>
 
-<h2>Dernières mesures par salle</h2>
+<h2>Latest measurements by room</h2>
 <table>
   <tr>
-    <th>Salle</th>
+    <th>Room</th>
     <th>Type</th>
-    <th>Valeur</th>
+    <th>Value</th>
     <th>Date</th>
-    <th>Heure</th>
+    <th>Time</th>
   </tr>
 <?php
 $sql = "
@@ -42,12 +42,12 @@ if ($result && mysqli_num_rows($result) > 0) {
     </tr>";
   }
 } else {
-  echo "<tr><td colspan='5'>Aucune donnée disponible</td></tr>";
+  echo "<tr><td colspan='5'>No data available</td></tr>";
 }
 ?>
 </table>
 
-<h2>Jauges temps réel (NodeRED)</h2>
+<h2>Real-time Gauges (NodeRED)</h2>
 <iframe src="http://192.168.1.108:1880/ui/" width="100%" height="500" style="border:1px solid #ccc; border-radius: 8px;"></iframe>
 
 <?php include('footer.php'); ?>
