@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    min-height: 100vh;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+nav {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00f2fe;
+}
+
+.content {
+    flex: 1; 
+    padding: 2rem;
+}
+
+.content h1, .content h2 {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.5rem;
+}
+
+.content ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+}
+
+table {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-collapse: collapse;
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+}
+
+th {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Styles pour les panneaux dans graphiques.php */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.panel-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    color: #2d3748;
+}
+
+.panel-title {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* === AJOUTS POUR LA PAGE GRAPHIQUES.PHP === */
+
+/* Conteneur pour les panneaux Grafana */
+.grafana-container {
+    padding: 0; /* On enlève le padding pour que les panneaux s'alignent bien */
+}
+
+/* On donne une hauteur fixe et rectangulaire aux panneaux Grafana */
+.grafana-container .panel-wrapper {
+    height: 350px; 
+}
+
+/* S'assure que l'iframe remplit bien le panneau */
+.panel-wrapper iframe {
+    height: 100%;
+    width: 100%;
+}
+
+/* Nouveau conteneur pour le panneau Node-RED */
+.nodered-container {
+    margin-top: 3rem; /* Ajoute un grand espace au-dessus */
+}
+
+/* On donne une très grande hauteur au panneau Node-RED */
+.nodered-container .panel-wrapper {
+    height: 80vh; /* 80% de la hauteur de l'écran, c'est très grand ! */
+}
+

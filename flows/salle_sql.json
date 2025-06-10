@@ -1,0 +1,308 @@
+[
+    {
+        "id": "155d77bea19419f5",
+        "type": "tab",
+        "label": "Flow MySQL",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e3de1c5dddb2fc7b",
+        "type": "mqtt in",
+        "z": "155d77bea19419f5",
+        "name": "IUT E003",
+        "topic": "AM107/by-room/E003/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f2d8a1e7.5d3a18",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "5c711ceafdbc83b0"
+            ]
+        ]
+    },
+    {
+        "id": "5c711ceafdbc83b0",
+        "type": "json",
+        "z": "155d77bea19419f5",
+        "name": "JSON E003",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "3f1c0179a927438f",
+                "7816f1b941e33d3a",
+                "c93a9c2cdb7d3fbb"
+            ]
+        ]
+    },
+    {
+        "id": "3f1c0179a927438f",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert Temp E003",
+        "func": "// Extrait la température et construit la requête SQL\nlet m = msg.payload[0];\nlet meta = msg.payload[1];\nlet temp = m.temperature;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${temp}, CURRENT_DATE(), CURRENT_TIME(), 'Temp_E003');`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 20,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "7816f1b941e33d3a",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert Hum E003",
+        "func": "// Extrait l'humidité et construit la requête SQL\nlet m = msg.payload[0];\nlet hum = m.humidity;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${hum}, CURRENT_DATE(), CURRENT_TIME(), 'Hum_E003');`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "c93a9c2cdb7d3fbb",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert CO2 E003",
+        "func": "// Extrait le CO2 et construit la requête SQL\nlet m = msg.payload[0];\nlet co2 = m.co2;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${co2}, CURRENT_DATE(), CURRENT_TIME(), 'CO2_E003');`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 140,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "7472ea341890fcf4",
+        "type": "mqtt in",
+        "z": "155d77bea19419f5",
+        "name": "IUT E100",
+        "topic": "AM107/by-room/E100/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f2d8a1e7.5d3a18",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 200,
+        "wires": [
+            [
+                "372dd8434caefcbc"
+            ]
+        ]
+    },
+    {
+        "id": "372dd8434caefcbc",
+        "type": "json",
+        "z": "155d77bea19419f5",
+        "name": "JSON E100",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 260,
+        "y": 200,
+        "wires": [
+            [
+                "f1a889ef0574cea5",
+                "5c9da6ba265b931d"
+            ]
+        ]
+    },
+    {
+        "id": "f1a889ef0574cea5",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert Temp E100",
+        "func": "// Extrait la température E100 et construit la requête SQL\nlet m = msg.payload[0];\nlet temp = m.temperature;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${temp}, CURRENT_DATE(), CURRENT_TIME(), 'Temp_E100');`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "5c9da6ba265b931d",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert Illum E100",
+        "func": "// Extrait l'illumination E100 et construit la requête SQL\nlet m = msg.payload[0];\nlet illu = m.illumination;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${illu}, CURRENT_DATE(), CURRENT_TIME(), 'Illum_E100');`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "91c564d1de0a72fc",
+        "type": "mqtt in",
+        "z": "155d77bea19419f5",
+        "name": "IUT E007",
+        "topic": "AM107/by-room/E007/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f2d8a1e7.5d3a18",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "6a2d74bfdc494672"
+            ]
+        ]
+    },
+    {
+        "id": "6a2d74bfdc494672",
+        "type": "json",
+        "z": "155d77bea19419f5",
+        "name": "JSON E007",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "378c1f655c558145",
+                "a6693386f1158a77"
+            ]
+        ]
+    },
+    {
+        "id": "378c1f655c558145",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert Temp E007",
+        "func": "// Extrait la température E007 et construit la requête SQL\nlet m = msg.payload[0];\nlet temp = m.temperature;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${temp}, CURRENT_DATE(), CURRENT_TIME(), 'Temp_E007');`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "a6693386f1158a77",
+        "type": "function",
+        "z": "155d77bea19419f5",
+        "name": "Insert Press E007",
+        "func": "// Extrait la pression E007 et construit la requête SQL\nlet m = msg.payload[0];\nlet pres = m.pressure;\nmsg.topic = `INSERT INTO Mesure (valeur, date, heure, id_capteur) VALUES (` +\n             `${pres}, CURRENT_DATE(), CURRENT_TIME(), 'Press_E007');`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "8c25133490888b7a"
+            ]
+        ]
+    },
+    {
+        "id": "8c25133490888b7a",
+        "type": "mysql",
+        "z": "155d77bea19419f5",
+        "mydb": "3ee125b43d64f8ad",
+        "name": "MySQL IUT",
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "1bc42863318526e9"
+            ]
+        ]
+    },
+    {
+        "id": "1bc42863318526e9",
+        "type": "debug",
+        "z": "155d77bea19419f5",
+        "name": "Debug SQL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "x": 860,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f2d8a1e7.5d3a18",
+        "type": "mqtt-broker",
+        "name": "IUT Blagnac",
+        "broker": "mqtt.iut-blagnac.fr",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "3ee125b43d64f8ad",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "192.168.101.219",
+        "port": "3306",
+        "db": "sae23",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]

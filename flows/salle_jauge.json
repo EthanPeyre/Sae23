@@ -1,0 +1,873 @@
+[
+    {
+        "id": "e948ae4a83d67003",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "0edd170c18bd8e99",
+        "type": "comment",
+        "z": "e948ae4a83d67003",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\n otherwise any flow changes are lost when you redeploy or upgrade the container\n (e.g. upgrade to a more recent node-red docker image).\n  If you are using named volumes you can ignore this warning.\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redeploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "09ecf2e7755d82bb",
+        "type": "mqtt in",
+        "z": "e948ae4a83d67003",
+        "name": "IUT E003",
+        "topic": "AM107/by-room/E003/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b403726aeb184f51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 398,
+        "y": 148,
+        "wires": [
+            [
+                "050ff48d1cbaa352",
+                "78f5193ec8219f25"
+            ]
+        ]
+    },
+    {
+        "id": "78f5193ec8219f25",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Data E003",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 588,
+        "y": 148,
+        "wires": []
+    },
+    {
+        "id": "050ff48d1cbaa352",
+        "type": "json",
+        "z": "e948ae4a83d67003",
+        "name": "JSON E003",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 558,
+        "y": 208,
+        "wires": [
+            [
+                "950f7bcf67bacc9d",
+                "da7a1f21baa180e1",
+                "45abf00948b89f9f"
+            ]
+        ]
+    },
+    {
+        "id": "950f7bcf67bacc9d",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire Temp E003",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].temperature",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 728,
+        "y": 168,
+        "wires": [
+            [
+                "afbb45e547409f98",
+                "187a649df5f3d813"
+            ]
+        ]
+    },
+    {
+        "id": "187a649df5f3d813",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug Temp E003",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 868,
+        "y": 168,
+        "wires": []
+    },
+    {
+        "id": "afbb45e547409f98",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Température E003",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "20",
+        "diff": false,
+        "className": "",
+        "x": 998,
+        "y": 168,
+        "wires": []
+    },
+    {
+        "id": "da7a1f21baa180e1",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire Hum E003",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].humidity",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 728,
+        "y": 248,
+        "wires": [
+            [
+                "25c9a842e8aa4fb5",
+                "b99657dc0e7b5f33"
+            ]
+        ]
+    },
+    {
+        "id": "b99657dc0e7b5f33",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug Hum E003",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 868,
+        "y": 248,
+        "wires": []
+    },
+    {
+        "id": "25c9a842e8aa4fb5",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidité E003",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 998,
+        "y": 248,
+        "wires": []
+    },
+    {
+        "id": "45abf00948b89f9f",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire CO2 E003",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].co2",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 728,
+        "y": 328,
+        "wires": [
+            [
+                "66e8deece5569f44",
+                "703a7a2fbdb7c6c5"
+            ]
+        ]
+    },
+    {
+        "id": "703a7a2fbdb7c6c5",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug CO2 E003",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 868,
+        "y": 328,
+        "wires": []
+    },
+    {
+        "id": "66e8deece5569f44",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CO2 E003",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "800",
+        "seg2": "1200",
+        "diff": false,
+        "className": "",
+        "x": 998,
+        "y": 328,
+        "wires": []
+    },
+    {
+        "id": "1718cd197691776f",
+        "type": "mqtt in",
+        "z": "e948ae4a83d67003",
+        "name": "IUT E100",
+        "topic": "AM107/by-room/E100/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b403726aeb184f51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 399,
+        "y": 384,
+        "wires": [
+            [
+                "54c4fad9f5b10a19",
+                "b3416e6f4be75982"
+            ]
+        ]
+    },
+    {
+        "id": "b3416e6f4be75982",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Data E100",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 589,
+        "y": 384,
+        "wires": []
+    },
+    {
+        "id": "54c4fad9f5b10a19",
+        "type": "json",
+        "z": "e948ae4a83d67003",
+        "name": "JSON E100",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 559,
+        "y": 444,
+        "wires": [
+            [
+                "e91ed56b92f71143",
+                "cff7e3a07970f753",
+                "c502ea29e1b4400b"
+            ]
+        ]
+    },
+    {
+        "id": "e91ed56b92f71143",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire Temp E100",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].temperature",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 729,
+        "y": 404,
+        "wires": [
+            [
+                "35b683aa8d87066b",
+                "99309fe6388c068d"
+            ]
+        ]
+    },
+    {
+        "id": "99309fe6388c068d",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug Temp E100",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 869,
+        "y": 404,
+        "wires": []
+    },
+    {
+        "id": "35b683aa8d87066b",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Température E100",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "20",
+        "diff": false,
+        "className": "",
+        "x": 999,
+        "y": 404,
+        "wires": []
+    },
+    {
+        "id": "cff7e3a07970f753",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire Hum E100",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].humidity",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 729,
+        "y": 484,
+        "wires": [
+            [
+                "c5d02eb547362a15",
+                "899f858e4d7243e1"
+            ]
+        ]
+    },
+    {
+        "id": "899f858e4d7243e1",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug Hum E100",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 869,
+        "y": 484,
+        "wires": []
+    },
+    {
+        "id": "c5d02eb547362a15",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidité E100",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 999,
+        "y": 484,
+        "wires": []
+    },
+    {
+        "id": "c502ea29e1b4400b",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire CO2 E100",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].co2",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 729,
+        "y": 564,
+        "wires": [
+            [
+                "fec1a28bb057d513",
+                "608d22569421a47e"
+            ]
+        ]
+    },
+    {
+        "id": "608d22569421a47e",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug CO2 E100",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 869,
+        "y": 564,
+        "wires": []
+    },
+    {
+        "id": "fec1a28bb057d513",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CO2 E100",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "800",
+        "seg2": "1200",
+        "diff": false,
+        "className": "",
+        "x": 999,
+        "y": 564,
+        "wires": []
+    },
+    {
+        "id": "a7b8fbd941b3987a",
+        "type": "mqtt in",
+        "z": "e948ae4a83d67003",
+        "name": "IUT E007",
+        "topic": "AM107/by-room/E007/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b403726aeb184f51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 168,
+        "y": 798,
+        "wires": [
+            [
+                "a1ad532311656773",
+                "12372e1140347e67"
+            ]
+        ]
+    },
+    {
+        "id": "12372e1140347e67",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Data E007",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 348,
+        "y": 758,
+        "wires": []
+    },
+    {
+        "id": "a1ad532311656773",
+        "type": "json",
+        "z": "e948ae4a83d67003",
+        "name": "JSON E007",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 318,
+        "y": 818,
+        "wires": [
+            [
+                "d8e54d79baf31480",
+                "525e1e3e10caf410",
+                "e7429f5fb9725bca"
+            ]
+        ]
+    },
+    {
+        "id": "d8e54d79baf31480",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire Temp E007",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].temperature",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 488,
+        "y": 778,
+        "wires": [
+            [
+                "756062502647ed61",
+                "f7c0569ea962d126"
+            ]
+        ]
+    },
+    {
+        "id": "f7c0569ea962d126",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug Temp E007",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 628,
+        "y": 778,
+        "wires": []
+    },
+    {
+        "id": "756062502647ed61",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Température E007",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "20",
+        "diff": false,
+        "className": "",
+        "x": 758,
+        "y": 778,
+        "wires": []
+    },
+    {
+        "id": "525e1e3e10caf410",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire Hum E007",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].humidity",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 488,
+        "y": 858,
+        "wires": [
+            [
+                "9e866f39252324b5",
+                "280a823154590196"
+            ]
+        ]
+    },
+    {
+        "id": "280a823154590196",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug Hum E007",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 628,
+        "y": 858,
+        "wires": []
+    },
+    {
+        "id": "9e866f39252324b5",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidité E007",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 758,
+        "y": 858,
+        "wires": []
+    },
+    {
+        "id": "e7429f5fb9725bca",
+        "type": "change",
+        "z": "e948ae4a83d67003",
+        "name": "Extraire CO2 E007",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].co2",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 488,
+        "y": 938,
+        "wires": [
+            [
+                "05962e85c2530bc5",
+                "a4efa17e5009ad76"
+            ]
+        ]
+    },
+    {
+        "id": "a4efa17e5009ad76",
+        "type": "debug",
+        "z": "e948ae4a83d67003",
+        "name": "Debug CO2 E007",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 628,
+        "y": 938,
+        "wires": []
+    },
+    {
+        "id": "05962e85c2530bc5",
+        "type": "ui_gauge",
+        "z": "e948ae4a83d67003",
+        "name": "",
+        "group": "d79635b65e183f07",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CO2 E007",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "800",
+        "seg2": "1200",
+        "diff": false,
+        "className": "",
+        "x": 758,
+        "y": 938,
+        "wires": []
+    },
+    {
+        "id": "b403726aeb184f51",
+        "type": "mqtt-broker",
+        "name": "IUT Blagnac",
+        "broker": "mqtt.iut-blagnac.fr",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d79635b65e183f07",
+        "type": "ui_group",
+        "name": "Capteurs Température",
+        "tab": "7c73505f40a00de6",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7c73505f40a00de6",
+        "type": "ui_tab",
+        "name": "Bâtiment RT",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
