@@ -63,39 +63,6 @@ Ce projet a pour but de **récupérer**, **stocker**, et **visualiser** les mesu
    * Dans Grafana → **Dashboards** → **Import** → téléversez `IUT-...-Grafana.json`
    * Sélectionnez la **DataSource MySQL** correspondante (`sae23`).
 
-## Arborescence du projet (Tree)
-
-sae23/
-│
-├── sql/
-│   └── schema.sql            # Script de création des tables MySQL
-│
-├── flows/                    # Flows Node‑RED pour MQTT → MySQL et jauges
-│   ├── salle_sql.json
-│   └── salle_jauge.json
-│
-├── grafana/
-│   └── IUT-1749116382877-Grafana.json    # Export JSON du dashboard Grafana
-│
-└── website/                 ← code du site PHP procédural
-    │
-    ├── admin.php            ← CRUD bâtiments / salles / capteurs (admin)
-    ├── config.php           ← connexion mysqli + session + fonction h()
-    ├── db.php               ← alias de la connexion à MySQL
-    ├── donnees.php          ← dernières mesures + iframe Node‑RED
-    ├── footer.php           ← pied de page commun HTML
-    ├── gestion.php          ← consultation + stats par gestionnaire
-    ├── gestion_projet.php   ← GANTT, outils, synthèses, conclusion
-    ├── graphiques.php       ← iframe Grafana
-    ├── header.php           ← en‑tête HTML + menu + inclusion config
-    ├── index.php            ← page d’accueil (objectif, bâtiments, salles, mentions légales)
-    ├── login.php            ← formulaire de connexion administrateur
-    ├── logout.php           ← destruction de session / redirection
-    ├── menu.php             ← menu de navigation inclus partout
-    └── style.css            ← styles globaux (CSS)
-│
-└── README.md
-
 ## Fonctionnalités clés
 
 * **Node‑RED**
