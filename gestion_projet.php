@@ -19,18 +19,32 @@
         </div>
     </div>
 
-    <div class="panel-wrapper">
-        <h3 class="panel-title">Synthèse Personnelle</h3>
-        <div style="padding: 1.5rem;">
-            <h4>Nom Membre 1</h4>
-            <p><strong>Activités :</strong> Conception de la base de données, développement du backend PHP pour l'authentification et le CRUD, configuration des flux Node-RED pour l'insertion SQL.</p>
-            <p><strong>Difficultés :</strong> La mise en place des requêtes préparées pour sécuriser l'application a nécessité une attention particulière.</p>
-            <hr style="margin: 1rem 0;">
-            <h4>Nom Membre 2</h4>
-            <p><strong>Activités :</strong> Intégration HTML/CSS, mise en place de la structure du site (header/footer), développement des pages de visualisation (Grafana, Node-RED UI), et création de la page de gestion de projet.</p>
-            <p><strong>Difficultés :</strong> Assurer la cohérence visuelle sur toutes les pages et rendre les panneaux de graphiques responsives.</p>
+        <div class="section">
+            <h2>Synthèse Personnelle</h2>
+            
+            <h3>Gabriel Roques</h3>
+            <p><strong>Activités réalisées :</strong> Intégration Grafana & Développement PHP & UI & XAMPP</p>
+            <p><strong>Problèmes rencontrés :</strong> [A compléter]</p>
+            <p><strong>Solutions apportées :</strong> [A compléter]</p>
+            <hr>
+
+            <h3>Lucas Cousin</h3>
+            <p><strong>Activités réalisées :</strong> Schéma de la table MySQL, schéma de conception du site web</p>
+            <p><strong>Problèmes rencontrés :</strong> [A compléter]</p>
+            <p><strong>Solutions apportées :</strong> [A compléter]</p>
+            <hr>
+
+            <h3>Mouad Meliani</h3>
+            <p><strong>Activités réalisées :</strong> Développement Node‑RED</p>
+            <p><strong>Problèmes rencontrés :</strong> [A compléter]</p>
+            <p><strong>Solutions apportées :</strong> [A compléter]</p>
+            <hr>
+
+            <h3>Ethan Peyre</h3>
+            <p><strong>Activités réalisées :</strong> Documentation & gestion de projet</p>
+            <p><strong>Problèmes rencontrés :</strong> [A compléter]</p>
+            <p><strong>Solutions apportées :</strong> [A compléter]</p>
         </div>
-    </div>
 
     <div class="panel-wrapper">
         <h3 class="panel-title">Conclusion</h3>
