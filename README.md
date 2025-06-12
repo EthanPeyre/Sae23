@@ -107,18 +107,5 @@ Ce projet a pour but de **récupérer**, **stocker**, et **visualiser** les mesu
 * **Mouad Meliani** – Développement Node‑RED
 * **Ethan Peyre** – Documentation & gestion de projet
 
-## Licence
-
-Ce projet est sous licence MIT.
-Voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
----
-
-> **Remarque :**
->
-> * Pense bien à mettre à jour les URLs/ports Docker et XAMPP
-> * Sauvegarde régulièrement ta base (`mysqldump SAE23 > backup.sql`)
-> * Pense à exporter les flows Node‑RED et le dashboard Grafana pour versionner
-
 Bonne continuation !!!
 Toute l'équipe.
